@@ -1,9 +1,3 @@
-"""
-PageRank Algorithm — Integrante 2 (Backend Core)
-Proyecto EID: Implementación Simplificada de PageRank usando Álgebra Lineal
-Curso: Álgebra Lineal para la Computación
-"""
-
 import numpy as np
 from typing import Union
 
