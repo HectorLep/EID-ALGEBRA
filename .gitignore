@@ -1,0 +1,46 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Archivos de Streamlit
+.streamlit/secrets.toml
+
+# Caché de herramientas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Distribución / empaquetado
+build/
+dist/
+*.egg-info/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Variables de entorno
+.env
+.env.*
+
+# Cobertura de tests
+.coverage
+htmlcov/

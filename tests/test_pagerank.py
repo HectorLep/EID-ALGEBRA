@@ -1,13 +1,3 @@
-"""
-Pruebas Unitarias para src/pagerank.py
-Integrante 2 — Validación de correctitud matemática y estabilidad del algoritmo.
-
-Ejecución:
-    pytest tests/test_pagerank.py -v
-    # o con unittest:
-    python -m unittest tests/test_pagerank.py -v
-"""
-
 import unittest
 import numpy as np
 import sys
