@@ -1,0 +1,17 @@
+\subsection{Análisis de Convergencia Algorítmica}
+En esta sección se evalúa el rendimiento del algoritmo PageRank implementado, analizando analíticamente el impacto del factor de amortiguamiento ($d$) y la estructura de enlaces (densidad) en la velocidad de convergencia.
+
+A partir de los experimentos sistemáticos realizados en el entorno de pruebas (Figura~\ref{fig:convergencia}), se desprenden las siguientes observaciones:
+
+\begin{itemize}
+    \item \textbf{Impacto del Factor de Amortiguamiento ($d$):} Se observa un incremento asintótico y pronunciado en el número de iteraciones requeridas para converger a medida que $d$ aumenta de $0.5$ a $0.95$. Con $d = 0.5$ el algoritmo converge en menos de 50 iteraciones, mientras que al alcanzar el valor crítico de $d = 0.95$, las iteraciones superan las 350. Esto se explica mediante la teoría espectral de cadenas de Markov: la tasa de convergencia está dominada por el segundo autovalor más grande de la matriz de transición corregida, el cual equivale exactamente a $d$. A medida que $d \to 1$, la brecha espectral ($1 - d$) tiende a cero, ralentizando significativamente el proceso iterativo.
+    \item \textbf{Efecto Estructural de la Densidad de Enlaces:} El experimento demuestra que las variaciones en la densidad de los enlaces ($0.1$, $0.3$ y $0.6$) no alteran el número de iteraciones necesarias para estabilizar los vectores de estado (razón por la cual las curvas se superponen en el gráfico). Sin embargo, cabe notar que un incremento en la densidad sí eleva de forma cuadrática la carga computacional interna de cada iteración individual debido a la multiplicación de matrices densas.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    % Asegúrate de guardar tu gráfico con este nombre en la carpeta del informe
+    \includegraphics[width=0.85\textwidth]{grafico_convergencia.png}
+    \caption{Impacto del factor de amortiguamiento en el número de iteraciones para $N=100$.}
+    \label{fig:convergencia}
+\end{figure}
