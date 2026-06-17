@@ -1,0 +1,15 @@
+{
+  "nodos": ["YouTube", "Twitter", "Facebook", "Fan Blog", "Noticias"],
+  "enlaces": [
+    {"origen": "YouTube", "destino": "Twitter"},
+    {"origen": "YouTube", "destino": "Facebook"},
+    {"origen": "Twitter", "destino": "YouTube"},
+    {"origen": "Twitter", "destino": "Facebook"},
+    {"origen": "Facebook", "destino": "YouTube"},
+    {"origen": "Facebook", "destino": "Twitter"},
+    {"origen": "Fan Blog", "destino": "YouTube"},
+    {"origen": "Fan Blog", "destino": "Twitter"},
+    {"origen": "Fan Blog", "destino": "Facebook"},
+    {"origen": "Noticias", "destino": "YouTube"}
+  ]
+}
