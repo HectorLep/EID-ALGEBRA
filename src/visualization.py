@@ -4,10 +4,12 @@ import numpy as np
 
 try:
     from .pagerank import build_transition_matrix
+    from .pagerank import compute_pagerank
 except ImportError:
     # Permite ejecutar este archivo como script suelto (ej. desde test_visual_temp.py)
     # sin que falle por no encontrar un paquete padre
     from pagerank import build_transition_matrix
+    from pagerank import compute_pagerank
 
 
 def build_networkx_graph(graph: dict) -> nx.DiGraph:
@@ -151,20 +153,23 @@ def plot_convergence(graph: dict, damping_factor: float = 0.85, ax=None,
                       max_iterations: int = 100, tolerance: float = 1e-8):
     """
     Grafica la evolución del score de cada nodo a lo largo de las
-    iteraciones de PageRank, hasta llegar a la convergencia.
+    iteraciones de PageRank, llamando directamente al backend.
     """
-    history, nodes = compute_pagerank_history(
+    # Llamamos a tu función con return_history=True
+    _, _, history, nodes = compute_pagerank(
         graph, damping_factor=damping_factor,
-        max_iterations=max_iterations, tolerance=tolerance
+        max_iterations=max_iterations, tolerance=tolerance,
+        return_history=True
     )
+
+    if not history:
+        return ax
 
     if ax is None:
         fig, ax = plt.subplots(figsize=(7, 5))
 
     history_array = np.array(history)  # shape: (n_iter, n_nodos)
 
-    # Ciclamos estilos de línea y marcador para que dos curvas con valores
-    # casi idénticos (ej. nodos simétricos en la red) se sigan distinguiendo
     estilos_linea = ["-", "--", "-.", ":"]
     marcadores = ["o", "s", "^", "D", "v"]
 

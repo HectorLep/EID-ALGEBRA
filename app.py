@@ -88,7 +88,7 @@ damping_factor = st.sidebar.slider(
 )
 
 max_iterations = st.sidebar.slider(
-    "Máximo de iteraciones", min_value=10, max_value=200, value=100, step=10,
+    "Máximo de iteraciones", min_value=10, max_value=500, value=100, step=10,
 )
 
 # --------------------------------------------------------------------
