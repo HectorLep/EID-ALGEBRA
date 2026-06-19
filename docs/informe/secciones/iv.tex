@@ -1,1 +1,33 @@
 % !TeX root = ../main.tex
+
+\section{Reflexión y Conclusiones}
+El modelamiento de sistemas computacionales e infraestructuras a través de la teoría de grafos y el álgebra lineal permite abstraer la complejidad topológica hacia representaciones matriciales (como la matriz de adyacencia o transición). 
+Esta cuantificación matemática habilita la aplicación de métodos numéricos para predecir comportamientos, identificar vulnerabilidades y priorizar información. El algoritmo PageRank constituye uno de los ejemplos más significativos de esta 
+transición entre la teoría algebraica pura y la ingeniería de software aplicada.
+
+\subsection{Ventajas y limitaciones del algoritmo PageRank}
+El análisis operativo del algoritmo revela métricas de rendimiento y vulnerabilidades teóricas que deben ser consideradas en su implementación: 
+
+\begin{itemize}
+    \item \textbf{Escalabilidad y complejidad computacional:} El cálculo directo de autovalores para una matriz presenta una complejidad temporal polinomial de $O(N^3)$, resultando computacionalmente intratable para un grafo 
+    web con miles de millones de nodos. Sin embargo, la gran ventaja de PageRank radica en la utilización del método iterativo de las potencias operando sobre la matriz de adyacencia dispersa (y aplicando el factor de amortiguamiento 
+    como un término constante). Al almacenar únicamente los coeficientes no nulos (los enlaces existentes), la complejidad computacional se reduce significativamente a $O(k \cdot E)$, donde $k$ es el número de iteraciones y $E$ es el número de aristas. \parencite{tigergraph}
+    \item \textbf{Manipulación de enlaces:} Dado que la autoridad se fundamenta en la suma ponderada de enlaces entrantes, el sistema es susceptible a vulneraciones topológicas conocidas como Link Farming (granjas de enlaces). 
+    Esta manipulación consiste en la creación deliberada de redes artificiales de nodos (sitios web falsos) altamente interconectados entre sí, con el único propósito de concentrar probabilidad y dirigirla hacia un nodo objetivo, 
+    inflando artificialmente el valor numérico de su autovector principal y alterando la legitimidad del ranking. \parencite{needmylink2025}
+\end{itemize}
+
+\subsection{PageRank en la actualidad}
+La aplicación de este algoritmo no se limita al motor de búsqueda de Google. Aunque fue diseñado originalmente con ese propósito, matemáticamente PageRank es un algoritmo genérico de centralidad basado en autovectores, 
+el cual permite su extrapolación a múltiples áreas científicas e industriales:
+
+\begin{itemize}
+    \item \textbf{Redes sociales y análisis de influencia:} Redes sociales como la conocida X (anteriormente Twitter) aplican variantes estocásticas como Personalized PageRank para modelar la propagación de información. 
+    En este contexto, los nodos representan usuarios y las aristas dirigidas denotan relaciones de seguimiento o interacción. El estado estacionario permite identificar a los hubs de información y optimizar los sistemas 
+    de recomendación (algoritmos que recomiendan a quien seguir). \parencite{tao2021}
+    \item \textbf{Procesamiento de Lenguaje Natural (PLN):} Algoritmos modernos como TextRank utilizan la lógica algebraica de PageRank para tareas de PLN como resumen y extracción de palabras clave. En este modelo, 
+    las palabras u oraciones se definen como nodos, y la similitud semántica actúa como el enlace ponderado, calculando así el texto más representativo del documento. \parencite{yassine2025}
+    \item \textbf{Sistemas de Recomendación y E-commerce:} Mediante la construcción de grafos bipartitos que modelan las interacciones entre usuarios y catálogos de productos, la aplicación del método de la potencia 
+    sobre sus matrices de transición permite obtener un vector de probabilidad estacionario que infiere preferencias latentes. La propagación del peso algebraico a través de estos enlaces permite sugerir artículos a 
+    consumidores basándose en la concentración de probabilidad generada por usuarios con patrones de consumo homólogos. \parencite{lorenzo2022}
+\end{itemize}
