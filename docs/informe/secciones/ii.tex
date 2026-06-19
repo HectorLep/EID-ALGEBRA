@@ -13,11 +13,11 @@ El diagrama de nuestro ejemplo se ve así:
 
 En el ejemplo, las conexiones fluyen de la siguiente manera:
 \begin{itemize}
-    \item El canal de YouTube dirige a su Twitter y Facebook. [cite: 15]
-    \item El Twitter enlaza hacia el canal de YouTube y el Facebook. [cite: 16]
-    \item El Facebook enlaza al Twitter y al canal de YouTube. [cite: 17]
-    \item El Fan Blog enlaza al Facebook, al canal de YouTube y al Twitter. [cite: 18]
-    \item El post de noticias enlaza únicamente al canal de YouTube. [cite: 19]
+    \item El canal de YouTube dirige a su Twitter y Facebook.
+    \item El Twitter enlaza hacia el canal de YouTube y el Facebook.
+    \item El Facebook enlaza al Twitter y al canal de YouTube.
+    \item El Fan Blog enlaza al Facebook, al canal de YouTube y al Twitter.
+    \item El post de noticias enlaza únicamente al canal de YouTube.
 \end{itemize}
 
 \subsection{Representación matricial}
@@ -31,7 +31,7 @@ Usando este diagrama de conexiones, nos daría la siguiente matriz de adyacencia
     1 & 1 & 0 & 0 & 0 \\
     1 & 1 & 1 & 0 & 0 \\
     1 & 0 & 0 & 0 & 0
-    \end{pmatrix} [cite: 20]
+    \end{pmatrix}
 \end{equation}
 
 Le aplicamos la lógica de las cadenas de Markov y vemos cómo las fracciones dependen de la cantidad total de hipervínculos de salida en cada página, dándonos esta matriz de transición ($P$):
@@ -43,22 +43,22 @@ Le aplicamos la lógica de las cadenas de Markov y vemos cómo las fracciones de
     1/2 & 1/2 & 0 & 0 & 0 \\
     1/3 & 1/3 & 1/3 & 0 & 0 \\
     1 & 0 & 0 & 0 & 0
-    \end{pmatrix} [cite: 21]
+    \end{pmatrix}
 \end{equation}
 
 \subsection{Iteraciones del algoritmo}
-Tomamos nuevamente el ejemplo del diagrama de antes y hacemos las iteraciones. [cite: 22] Para entender de dónde salen los valores de los vectores, realizamos una operación matemática llamada multiplicación de un vector por una matriz. [cite: 23] Para calcular el nuevo puntaje de una página, multiplicamos el vector de probabilidades actual por la columna correspondiente a esa página en la matriz de transición. [cite: 24]
+Tomamos nuevamente el ejemplo del diagrama de antes y hacemos las iteraciones. Para entender de dónde salen los valores de los vectores, realizamos una operación matemática llamada multiplicación de un vector por una matriz. Para calcular el nuevo puntaje de una página, multiplicamos el vector de probabilidades actual por la columna correspondiente a esa página en la matriz de transición.
 
 \textbf{1. El punto de partida ($v_0$):}
-Iniciamos con un vector donde todos los nodos tienen la misma probabilidad inicial ($1/5$). [cite: 25]
+Iniciamos con un vector donde todos los nodos tienen la misma probabilidad inicial ($1/5$).
 \begin{equation}
-    v_0 = \begin{pmatrix} 1/5 & 1/5 & 1/5 & 1/5 & 1/5 \end{pmatrix} [cite: 26]
+    v_0 = \begin{pmatrix} 1/5 & 1/5 & 1/5 & 1/5 & 1/5 \end{pmatrix}
 \end{equation}
 
 \textbf{2. La multiplicación (Producto punto):}
 Multiplicamos cada valor de $v_0$ por su valor correspondiente en la primera columna de la matriz $P$ (que contiene las probabilidades de que el resto de las páginas enlacen a YouTube) y sumamos los resultados:
 \begin{equation}
-    v_1(\text{YouTube}) = \left(\frac{1}{5} \cdot 0\right) + \left(\frac{1}{5} \cdot \frac{1}{2}\right) + \left(\frac{1}{5} \cdot \frac{1}{2}\right) + \left(\frac{1}{5} \cdot \frac{1}{3}\right) + \left(\frac{1}{5} \cdot 1\right) [cite: 27]
+    v_1(\text{YouTube}) = \left(\frac{1}{5} \cdot 0\right) + \left(\frac{1}{5} \cdot \frac{1}{2}\right) + \left(\frac{1}{5} \cdot \frac{1}{2}\right) + \left(\frac{1}{5} \cdot \frac{1}{3}\right) + \left(\frac{1}{5} \cdot 1\right)
 \end{equation}
 
 \textbf{3. La suma de fracciones:}
@@ -80,7 +80,7 @@ Aplicando este mismo procedimiento para cada columna y repitiéndolo en cada pas
 
 \textbf{Iteración 1 ($v_1 = v_0 \cdot P$):}
 \begin{equation*}
-    v_1 = \begin{pmatrix} \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} \end{pmatrix} \cdot P = \begin{pmatrix} \frac{7}{15} & \frac{4}{15} & \frac{4}{15} & 0 & 0 \end{pmatrix} [cite: 28]
+    v_1 = \begin{pmatrix} \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} \end{pmatrix} \cdot P = \begin{pmatrix} \frac{7}{15} & \frac{4}{15} & \frac{4}{15} & 0 & 0 \end{pmatrix}
 \end{equation*}
 
 \textbf{Iteración 2 ($v_2 = v_1 \cdot P$):}
@@ -94,4 +94,4 @@ Aplicando este mismo procedimiento para cada columna y repitiéndolo en cada pas
 \end{equation*}
 
 \subsection{Interpretación del ranking obtenido}
-Como vemos, el número más grande dentro de los vectores finales es de la página de YouTube ($\frac{22}{60}$). [cite: 29] Esto significa que la página con más relevancia (autoridad) es YouTube, y esto se debe a que es la página que recibe más enlaces importantes hacia ella. [cite: 30] También podemos ver que el Fan Blog y la página de Noticias son equivalentes a 0 en las iteraciones. [cite: 31] Esto se debe a que ninguna de las páginas de la red enlaza hacia ellos, por lo que el "navegante aleatorio" nunca los visita. [cite: 32]
+Como vemos, el número más grande dentro de los vectores finales es de la página de YouTube ($\frac{22}{60}$). Esto significa que la página con más relevancia (autoridad) es YouTube, y esto se debe a que es la página que recibe más enlaces importantes hacia ella. También podemos ver que el Fan Blog y la página de Noticias son equivalentes a 0 en las iteraciones. Esto se debe a que ninguna de las páginas de la red enlaza hacia ellos, por lo que el "navegante aleatorio" nunca los visita.
