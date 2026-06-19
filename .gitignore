@@ -44,3 +44,23 @@ Thumbs.db
 # Cobertura de tests
 .coverage
 htmlcov/
+
+# Archivos auxiliares de compilación LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.pdf
+
+# Directorios de compilación
+build/
+out/

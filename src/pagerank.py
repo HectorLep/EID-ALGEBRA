@@ -30,32 +30,41 @@ def compute_pagerank(
     graph: dict,
     damping_factor: float = 0.85,
     max_iterations: int = 100,
-    tolerance: float = 1e-8
-) -> tuple[dict, int]:
+    tolerance: float = 1e-8,
+    return_history: bool = False 
+):
     
     if not graph:
+        if return_history:
+            return {}, 0, [], []
         return {}, 0
 
     M, nodes = build_transition_matrix(graph)
     n = len(nodes)
 
-    # Vector inicial: distribución uniforme (suma = 1)
     r = np.ones(n) / n
-
-    # Vector de teletransportación uniforme
     teleport = np.ones(n) / n
+
+    # NUEVO: Guardamos el estado inicial si nos piden el historial
+    history = [r.copy()] if return_history else None
 
     for i in range(max_iterations):
         r_new = damping_factor * M @ r + (1 - damping_factor) * teleport
 
-        # Criterio de convergencia: norma L1 de la diferencia
+        if return_history:
+            history.append(r_new.copy())
+
+        # Criterio de convergencia
         if np.linalg.norm(r_new - r, ord=1) < tolerance:
             r = r_new
             break
 
         r = r_new
 
-    # Retorna el ranking y la iteración exacta en la que se detuvo
+    # NUEVO: Si piden el historial, devolvemos 4 cosas. Si no, solo las 2 de siempre.
+    if return_history:
+        return rank_nodes(r, nodes), i + 1, history, nodes
+        
     return rank_nodes(r, nodes), i + 1
 
 def rank_nodes(scores: np.ndarray, nodes: list) -> dict:
