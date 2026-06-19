@@ -1,0 +1,20 @@
+% !TeX root = ../main.tex
+
+\section{Marco Teórico}
+
+\subsection{Grafos y representación matricial}
+Los grafos son estructuras fundamentales en las matemáticas y la computación, y se utilizan para modelar las relaciones o conexiones entre distintos objetos. [cite: 2] Este modelo tiene dos elementos principales:
+\begin{itemize}
+    \item \textbf{Vértices (o nodos $V$):} En nuestro caso, representan las páginas web individuales. [cite: 3]
+    \item \textbf{Aristas (o enlaces $E$):} En nuestro caso, serían las conexiones o hipervínculos que unen los nodos. [cite: 4]
+\end{itemize}
+
+Hice un ejemplo sobre un canal de YouTube en el que existen 4 otras páginas conectadas: el Twitter del canal, el Facebook, un Fan Blog y un post de noticias. [cite: 5]
+
+\subsection{Matrices de transición probabilística}
+Usando los nodos y enlaces, crearemos una matriz que utilizaremos para ejecutar el algoritmo PageRank. [cite: 6] La matriz inicial se llama \textbf{matriz de adyacencia}.
+
+Nuestra matriz se representa con las filas (origen) y sus columnas (destino). [cite: 7] Se agrega un 1 en la intersección de la fila $i$ y la columna $j$ si entre las dos páginas hay un hipervínculo directo, y un 0 si no están conectadas. [cite: 8] Para añadir probabilidades, utilizamos las \textbf{Cadenas de Markov}. Una Cadena de Markov es un modelo que asume que la probabilidad de navegar hacia una nueva página depende únicamente de los hipervínculos disponibles en la página actual, sin importar de dónde venga el usuario. [cite: 9] Básicamente, para construir la matriz de transición probabilística, se toma la matriz de adyacencia que ya tenemos y se divide cada enlace por la cantidad total de hipervínculos salientes que hay en esa página. [cite: 10] Al aplicar esto, obtendremos fracciones que, al sumarlas por fila, siempre nos darán 1 (el 100\% de probabilidad). [cite: 11]
+
+\subsection{Autovalores y autovectores}
+Podemos seguir iterando el sistema (multiplicando las matrices) para conseguir un resultado más preciso y estabilizarlo. [cite: 12] Al momento en donde los números ya no cambian y encuentran su equilibrio definitivo se le llama \textbf{convergencia}. [cite: 13] Cuando el proceso iterativo alcanza este punto de equilibrio, el momento en que vuelvas a multiplicar el vector por la matriz de transición una vez más y el resultado te dé exactamente el mismo vector original, es cuando pasamos a llamar a ese vector el \textbf{Autovector} del sistema (estado estacionario). [cite: 14]
