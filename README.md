@@ -8,7 +8,7 @@ Este repositorio contiene una implementación simplificada del algoritmo **PageR
 
 ## 📂 Estructura del Proyecto
 
-```text
+```
 EID-ALGEBRA/
 │
 ├── app.py                     # Interfaz gráfica (Frontend en Streamlit)
