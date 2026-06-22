@@ -10,10 +10,43 @@
 \geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=3cm}
 \renewcommand{\baselinestretch}{1.2}
 
-\title{Proyecto de Investigación 5 \\ \textbf{Implementación Simplificada de PageRank utilizando Álgebra Lineal}}
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \includegraphics[width=0.8\textwidth]{logo_universidad.png}
+    
+    \vspace{2cm}
+    
+    {\huge\bfseries Proyecto de Investigación 5 \par}
+    \vspace{0.5cm}
+    {\Large\bfseries Implementación Simplificada de PageRank utilizando Álgebra Lineal \par}
+    
+    \vspace{1.3cm}
+    
+    {\large Curso: Álgebra Lineal para la Computación \par}
+    
+    \vspace{0.3cm}
+    
+    {\large \textbf{Integrantes:} \par}
+    \vspace{0.3cm}
+    {\Large Hector Lepio \par}
+    \vspace{0.2cm}
+    {\Large Nicolas Arriagada \par}
+    \vspace{0.2cm}
+    {\Large Jose Jimenez \par}
+    \vspace{0.2cm}
+    {\Large Ricardo Aravena \par}
+    \vspace{0.2cm}
+    {\Large Benjamin Rojas \par}
+    
+    \vfill
+    
+    {\large 23 de junio de 2026 \par}
+\end{titlepage}
+
 \newpage
 
 \section{Marco Teórico}
@@ -39,7 +72,7 @@ Básicamente, para construir la matriz de transición probabilística, se toma l
 \subsection{Autovalores y autovectores}
 Podemos seguir iterando el sistema (multiplicando las matrices) para conseguir un resultado más preciso y estabilizarlo. Al momento en donde los números ya no cambian y encuentran su equilibrio definitivo se le llama \textbf{convergencia}.
 
-Cuando el proceso iterativo alcanza este punto de equilibrio, el momento en que vuelvas a multiplicar el vector por la matriz de transición una vez más y el resultado te dé exactamente el mismo vector original, es cuando pasamos a llamar a ese vector el \textbf{Autovector} del sistema (estado estacionario).
+Cuando el proceso iterativo alcanza este punto de equilibrio, el momento en que vuelvas a multiplicar el vector por la matriz de transición una vez más y el resultado te dé exactamente el mismo vector original, es cuando pasamos a llamar a ese vector el \textbf{Autovector} del sistema (estado estacionario). Este autovector dominante, que está asociado al autovalor igual a 1, garantiza que exista un único estado estacionario. Los valores matemáticos dentro de este autovector representan el ranking final de PageRank, lo que define directamente la \textbf{importancia relativa de los nodos} dentro de la red.
 
 \section{Representación de Redes}
 
@@ -63,7 +96,9 @@ En el ejemplo, las conexiones fluyen de la siguiente manera:
 
 \subsection{Representación matricial}
 Usando este diagrama de conexiones, nos daría la siguiente matriz de adyacencia:
-(Recordemos que la primera fila es Youtube, la segunda Twitter, la tercera Facebook, cuarta Fan Blog, quinta Noticias)
+(Recordemos que la primera fila es Youtube, la segunda Twitter, la tercera Facebook, cuarta Fan Blog, quinta Noticias).
+
+\textit{Nota sobre la implementación: En esta sección del informe utilizamos la convención donde las filas representan el nodo de origen y las columnas el destino (Fila = Origen). En la implementación computacional del código se utiliza la convención opuesta (Columna = Origen). Ambas representaciones son matemáticamente equivalentes por transposición y arrojan los mismos resultados.}
 
 \begin{equation}
     A = \begin{pmatrix}
