@@ -11,7 +11,7 @@ import json
 import streamlit as st
 import matplotlib.pyplot as plt
 
-from src.pagerank import compute_pagerank
+from src.pagerank import compute_pagerank, build_transition_matrix
 from src.visualization import draw_graph, plot_convergence
 
 
@@ -125,3 +125,59 @@ plot_convergence(
     ax=ax_conv, max_iterations=max_iterations,
 )
 st.pyplot(fig_conv)
+
+# --------------------------------------------------------------------
+# Sección extra: matriz de transición y exploración paso a paso
+# de las iteraciones, para apoyar la explicación matemática en vivo
+# durante la presentación (sin necesidad de escribir en la pizarra).
+# --------------------------------------------------------------------
+st.divider()
+st.subheader("Matriz de transición y proceso iterativo")
+st.markdown(
+    "Esta sección muestra cómo se construye la matriz de transición a "
+    "partir del grafo, y cómo evoluciona el vector de probabilidades "
+    "en cada iteración hasta alcanzar la convergencia."
+)
+
+M, nodes_M = build_transition_matrix(grafo)
+
+with st.expander("Ver matriz de transición M (columna = origen, fila = destino)", expanded=True):
+    tabla_M = []
+    for i, nodo_fila in enumerate(nodes_M):
+        fila = {"": nodo_fila}
+        for j, nodo_col in enumerate(nodes_M):
+            fila[nodo_col] = round(float(M[i, j]), 3)
+        tabla_M.append(fila)
+    st.table(tabla_M)
+    st.caption(
+        "Cada columna representa los enlaces salientes de un nodo, "
+        "repartidos en partes iguales entre sus destinos. Cada columna suma 1."
+    )
+
+_, _, history, nodes_hist = compute_pagerank(
+    grafo, damping_factor=damping_factor, max_iterations=max_iterations,
+    return_history=True,
+)
+
+st.markdown("**Explorar el vector de probabilidades en cada iteración:**")
+iteracion_seleccionada = st.slider(
+    "Selecciona la iteración a visualizar",
+    min_value=0, max_value=len(history) - 1, value=0,
+)
+
+vector_actual = history[iteracion_seleccionada]
+vector_anterior = history[iteracion_seleccionada - 1] if iteracion_seleccionada > 0 else None
+
+tabla_iteracion = []
+for i, nodo in enumerate(nodes_hist):
+    fila = {"Nodo": nodo, f"Score en iteración {iteracion_seleccionada}": round(float(vector_actual[i]), 4)}
+    if vector_anterior is not None:
+        fila["Cambio respecto a la iteración anterior"] = round(float(vector_actual[i] - vector_anterior[i]), 4)
+    tabla_iteracion.append(fila)
+
+st.table(tabla_iteracion)
+
+if iteracion_seleccionada == 0:
+    st.caption("Iteración 0: distribución inicial uniforme (1/n para cada nodo).")
+elif iteracion_seleccionada == len(history) - 1:
+    st.caption("Esta es la última iteración calculada (estado de convergencia o máximo alcanzado).")
